@@ -1,3 +1,4 @@
+#RUN TEST WITH : python -m pytest (-v)
 [elevatorID, floorRequestButtonID, callButtonID] = [1,1,1]
 
 class Column:
