@@ -1,7 +1,7 @@
 import os
 import random
 import time
-#RUN TEST WITH : python -m pytest (-v)
+
 [elevatorID, floorRequestButtonID, callButtonID] = [1,1,1]
 
 #Defines a Door
@@ -182,10 +182,8 @@ class Column:
         bestElevatorInformations = type('bestElevatorInformations', (object,), {'bestElevator' : bestElevator, 'bestScore' : bestScore, 'referenceGap' : referenceGap})
         return bestElevatorInformations
 
-#def printWithDelay(message):
-    #time.sleep(1)
-    #parint(message)
-    
+#######################################################################################################################################################################################
+
 #Creates the selected scenario
 def inputInputsInColumn(numberOfFloors, numberOfElevators, customScenario):
 
@@ -267,7 +265,7 @@ def inputInputsInColumn(numberOfFloors, numberOfElevators, customScenario):
         goodElevator2 = column1.requestElevator(3, 'up')
         goodElevator2.requestFloor(5)
 
-    #Customized scenario selected by USER
+    #Customized scenario selected by USER                   ##IN PROGRESS##
     elif customScenario == '0':
         print()
         print("Scenario 1")
@@ -300,7 +298,7 @@ while userInputIsRight == False:
             else:
                 os.system('cls')
         userInputIsRight = True
-    elif userNumberInput == '2':
+    elif userNumberInput == '2':                            ## IN PROGRESS ##
         inputInputsInColumn(10, 2, '0')
         userInputIsRight = True
     else:
