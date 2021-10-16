@@ -11,7 +11,12 @@ Elevator selection is based on the elevator's status, current floor, direction a
 
 ## Dependencies
 
-### To be able to try the program with your own settings you only need to follow the instructions given by the console after running the program after the following:
+### To run the tests for this program you need the Package Installer for Python (PIP) if needed and Pytest installed and then you can run in your Terminal:
+```
+python -m pytest
+```
+
+### And now, to be able to try the program with your own settings you only need to follow the instructions given by the console after running the program after the following:
 
 - First you need to run the "residential_controller.py" in Visual Studio Code or Visual Studio:
 - Then follow the instructions given by the console.
@@ -22,18 +27,3 @@ Elevator selection is based on the elevator's status, current floor, direction a
 - Scenario 2 has `15` floors and `5` elevators
 - Scenario 3 has `30` floors and `10` elevators
 - Scenario 4 is special. You can input as many floors and elevators as you want.
-
-```
-bestElevator.requestFloor(floor)
-```
-
-### And now, to run the tests for this program you need Node JS and NPM installed and then you need to first run in your Terminal:
-```
-npm install
-```
-
-and then, to run the tests, input:
-
-```
-npm test
-```
