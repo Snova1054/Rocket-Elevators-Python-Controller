@@ -1,34 +1,39 @@
 # Rocket-Elevators-Python-Controller
-This is the template to use for the python residential controller. You will find the classes that should be used along with some methods described in the requirements. The necessary file to run some tests is also included. 
+## Description
 
-### Installation
+This controller's whole purpose is to handle a personalized amount of elevators with a personalized amount of floors in a single column.
 
-First, depending on your python version, make sure to install the Package Installer for Python (PIP) if needed:
+It can be controlled first from the outside of an elevator on each floor and after that, from the inside a specific elevator.
 
-https://pip.pypa.io/en/stable/installing/
+When used called from outside, the column sends the best elevator possible from the user's current floor and direction. Then, when used from the inside of the elevator that was selected by the column, the elevator is moved to the to the user's destination.
 
-Next, install Pytest:
+Elevator selection is based on the elevator's status, current floor, direction and floor request list and on the user's floor and direction.
 
-https://docs.pytest.org/en/6.2.x/getting-started.html
+## Dependencies
 
-### Running the tests
+### To be able to try the program with your own settings you only need to follow the instructions given by the console after running the program after the following:
 
-To launch the tests:
+- First you need to run the "residential_controller.py" in Visual Studio Code or Visual Studio:
+- Then follow the instructions given by the console.
 
-`pytest`
+#### Each scenario:
+##### Keep in mind that every elevator's current floor, status, direction and destination is randomnly generated. As is the user's current floor, direction and destination.
+- Scenario 1 has `10` floors and `2` elevators
+- Scenario 2 has `15` floors and `5` elevators
+- Scenario 3 has `30` floors and `10` elevators
+- Scenario 4 is special. You can input as many floors and elevators as you want.
 
-With a fully completed project, you should get an output like:
+```
+bestElevator.requestFloor(floor)
+```
 
-![Screenshot from 2021-06-15 13-13-13](https://user-images.githubusercontent.com/28630658/122095645-a41fa000-cddb-11eb-9322-81a766cce4bb.png)
+### And now, to run the tests for this program you need Node JS and NPM installed and then you need to first run in your Terminal:
+```
+npm install
+```
 
-You can also get more details about each test by adding the `-v` flag: 
+and then, to run the tests, input:
 
-`pytest -v` 
-
-which should give something like: 
-
-![Screenshot from 2021-06-15 13-13-33](https://user-images.githubusercontent.com/28630658/122095759-c74a4f80-cddb-11eb-999d-dfe35dbe7d18.png)
-
-The test file can be left in your final project but no scenarios should be present in your code. The grader will run tests similar to the ones provided.
-
-Of course, make sure to edit this Readme file to describe your own project!
+```
+npm test
+```

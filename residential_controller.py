@@ -63,20 +63,20 @@ class Elevator:
                 self.direction = 'up'
                 self.sortFloorList()
                 while self.currentFloor < Destination:
-                    time.sleep(1)
+                    time.sleep(0.5)
                     print("Elevator's current floor is : {0}".format(self.currentFloor))
                     self.currentFloor +=1
             elif self.currentFloor > Destination:
                 self.direction = 'down'
                 self.sortFloorList()
                 while self.currentFloor > Destination:
-                    time.sleep(1)
+                    time.sleep(0.5)
                     print("Elevator's current floor is : {0}".format(self.currentFloor))
                     self.currentFloor -=1
             self.status = 'stopped'
             self.floorRequestList.pop(0)
         self.status = 'idle'
-        time.sleep(1)
+        time.sleep(0.5)
         print("Elevator's arrived at the floor #{0}".format(self.currentFloor))
                 
     #Sorts the floor requests List according to the Direction of the Elevator
@@ -89,13 +89,15 @@ class Elevator:
     #Opens and Closes the Doors of the Elevator
     def operateDoors(self):
         self.door.status = 'opened'
-        time.sleep(1)
+        time.sleep(0.5)
         print("Elevator's doors are opening")
-        time.sleep(1)
+        time.sleep(0.5)
         print("Waiting 5 seconds")
         self.door.status = 'closed'
-        time.sleep(1)
-        print("Elevator's doors are closing")
+        time.sleep(0.5)
+        print()
+        input("Press Enter to continue...")
+        print()
 
 #Defines a Column
 class Column:
@@ -139,7 +141,7 @@ class Column:
     def requestElevator(self, Floor, Direction):
         print("Requesting an Elevator for the floor #{0} to go {1}".format(Floor, Direction))
         elevator = self.findElevator(Floor, Direction)
-        print("The best Elevator for you has the ID #{0}".format(elevator.ID))
+        print("The best Elevator for you has the ID #{0} and is on the floor #{1}".format(elevator.ID, elevator.currentFloor))
         elevator.floorRequestList.append(Floor)
         elevator.move()
         elevator.operateDoors()
@@ -182,127 +184,92 @@ class Column:
         bestElevatorInformations = type('bestElevatorInformations', (object,), {'bestElevator' : bestElevator, 'bestScore' : bestScore, 'referenceGap' : referenceGap})
         return bestElevatorInformations
 
-#######################################################################################################################################################################################
-
-#Creates the selected scenario
-def inputInputsInColumn(numberOfFloors, numberOfElevators, customScenario):
-
-    #Scenario #1 selected by USER
-    if customScenario == '1':
-        print()
-        print("Scenario 1")
-        print()
-        print("This Column has {0} floors and {1} elevators".format(numberOfFloors,numberOfElevators))
-        column1 = Column(1, numberOfFloors, numberOfElevators)
-        column1.elevatorList[0].currentFloor = 2
-        column1.elevatorList[0].status = 'idle'
-        column1.elevatorList[1].currentFloor = 6
-        column1.elevatorList[1].status = 'idle'
-
-        print("Elevator with ID #{0} is located at the floor #{1} and is {2}".format(column1.elevatorList[0].ID,column1.elevatorList[0].currentFloor, column1.elevatorList[0].status))
-        print("Elevator with ID #{0} is located at the floor #{1} and is {2}".format(column1.elevatorList[1].ID,column1.elevatorList[1].currentFloor, column1.elevatorList[1].status))
-        print()
-        input("Are you ready?")
-        print()
-        goodElevator = column1.requestElevator(3, 'up')
-        goodElevator.requestFloor(7)
-
-    #Scenario #2 selected by USER
-    elif customScenario == '2':
-        print()
-        print("Scenario 2")
-        print()
-        print("This Column has {0} floors and {1} elevators".format(numberOfFloors,numberOfElevators))
-        column1 = Column(1, numberOfFloors, numberOfElevators)
-        column1.elevatorList[0].currentFloor = 10
-        column1.elevatorList[0].status = 'idle'
-        column1.elevatorList[1].currentFloor = 3
-        column1.elevatorList[1].status = 'idle'
-
-        print("Elevator with ID #{0} is located at the floor #{1} and is {2}".format(column1.elevatorList[0].ID,column1.elevatorList[0].currentFloor, column1.elevatorList[0].status))
-        print("Elevator with ID #{0} is located at the floor #{1} and is {2}".format(column1.elevatorList[1].ID,column1.elevatorList[1].currentFloor, column1.elevatorList[1].status))
-        print()
-        input("Are you ready?")
-        print()
-        goodElevator1 = column1.requestElevator(1, 'up')
-        goodElevator1.requestFloor(6)
-
-        print("Elevator with ID #{0} is located at the floor #{1} and is {2}".format(column1.elevatorList[0].ID,column1.elevatorList[0].currentFloor, column1.elevatorList[0].status))
-        print("Elevator with ID #{0} is located at the floor #{1} and is {2}".format(column1.elevatorList[1].ID,column1.elevatorList[1].currentFloor, column1.elevatorList[1].status))
-        goodElevator2 = column1.requestElevator(3, 'up')
-        goodElevator2.requestFloor(5)
-
-        print("Elevator with ID #{0} is located at the floor #{1} and is {2}".format(column1.elevatorList[0].ID,column1.elevatorList[0].currentFloor, column1.elevatorList[0].status))
-        print("Elevator with ID #{0} is located at the floor #{1} and is {2}".format(column1.elevatorList[1].ID,column1.elevatorList[1].currentFloor, column1.elevatorList[1].status))
-        goodElevator3 = column1.requestElevator(9, 'down')
-        goodElevator3.requestFloor(2)
-
-    #Scenario #3 selected by USER
-    elif customScenario == '3':
-        print()
-        print("Scenario 3")
-        print()
-        print("This Column has {0} floors and {1} elevators".format(numberOfFloors,numberOfElevators))
-        column1 = Column(1, numberOfFloors, numberOfElevators)
-        column1.elevatorList[0].currentFloor = 10
-        column1.elevatorList[0].status = 'idle'
-        column1.elevatorList[1].currentFloor = 3
-        column1.elevatorList[1].status = 'moving'
-        column1.elevatorList[1].direction = 'up'
-        column1.elevatorList[1].floorRequestList.append(6)
 
 
-        print("Elevator with ID #{0} is located at the floor #{1} and is {2}".format(column1.elevatorList[0].ID,column1.elevatorList[0].currentFloor, column1.elevatorList[0].status))
-        print("Elevator with ID #{0} is located at the floor #{1} and is {2}".format(column1.elevatorList[1].ID,column1.elevatorList[1].currentFloor, column1.elevatorList[1].status))
-        print()
-        input("Are you ready?")
-        print()
-        goodElevator1 = column1.requestElevator(1, 'up')
-        goodElevator1.requestFloor(6)
+### This bottom section is dedicated to pre-made and custom scenarios after running Pytest ###
+## Toggle the comments from 188 to 270 to proceed ##
 
-        print("Elevator with ID #{0} is located at the floor #{1} and is {2}".format(column1.elevatorList[0].ID,column1.elevatorList[0].currentFloor, column1.elevatorList[0].status))
-        print("Elevator with ID #{0} is located at the floor #{1} and is {2}".format(column1.elevatorList[1].ID,column1.elevatorList[1].currentFloor, column1.elevatorList[1].status))
-        goodElevator2 = column1.requestElevator(3, 'up')
-        goodElevator2.requestFloor(5)
+# #Creates the selected scenario
+# def inputInputsInColumn(numberOfFloors, numberOfElevators, customScenario):
 
-    #Customized scenario selected by USER                   ##IN PROGRESS##
-    elif customScenario == '0':
-        print()
-        print("Scenario 1")
-        print()
-        print("This Column has {0} floors and {1} elevators".format(numberOfFloors,numberOfElevators))
-        print()
-        input("Are you ready?")
-        print()
-        column1 = Column(1, numberOfFloors, numberOfElevators)
-        for x in numberOfElevators:
-            column1.elevatorList[x].currentFloor = random.randrange(1,numberOfFloors)
-            print("Elevator with ID #{0} is located at the floor #{1} and is {2}".format(column1.elevatorList[x].ID,column1.elevatorList[x].currentFloor, column1.elevatorList[x].status))
-            column1.elevatorList[x].direction = 'idle'
-            column1.elevatorList[x].status = 'idle'
+#     #Scenario selected by USER
+#     userFloor = random.randrange(1, numberOfFloors)
+#     possibleDirections = ['up', 'down']
+#     userDirection = 'none'
+#     userRequestedFloor = 0
+#     elevatorsPossibleStatus = ['idle', 'moving']
+#     print()
+#     print("Scenario {0}".format(customScenario))
+#     print()
+#     print("This Column has {0} floors and {1} elevators".format(numberOfFloors,numberOfElevators))
+#     column = Column(1, numberOfFloors, numberOfElevators)
+
+#     for x in range(numberOfElevators):
+#         random0to1 =  random.randrange(0,2)
+#         column.elevatorList[x].currentFloor = random.randrange(1, numberOfFloors)
+#         column.elevatorList[x].status = elevatorsPossibleStatus[random0to1]
+
+#         if column.elevatorList[x].status == elevatorsPossibleStatus[1] and column.elevatorList[x].currentFloor == numberOfFloors:
+#             column.elevatorList[x].direction = possibleDirections[1]
+#         elif column.elevatorList[x].status == elevatorsPossibleStatus[1] and column.elevatorList[x].currentFloor == 1:
+#             column.elevatorList[x].direction = possibleDirections[0]
+#         else:
+#             column.elevatorList[x].direction = possibleDirections[random.randrange(0,1)]
+#             if column.elevatorList[x].direction == possibleDirections[0]:
+#                 column.elevatorList[x].floorRequestList.append(random.randrange(column.elevatorList[x].currentFloor, numberOfFloors))
+#             else:
+#                 column.elevatorList[x].floorRequestList.append(random.randrange(1, column.elevatorList[x].currentFloor))
+#         if column.elevatorList[x].status == elevatorsPossibleStatus[0]:
+#             print("Elevator with ID #{0} is located at the floor #{1} and is {2}".format(column.elevatorList[x].ID,column.elevatorList[x].currentFloor, column.elevatorList[x].status))
+#         else:
+#             print("Elevator with ID #{0} is located at the floor #{1} and is {2} towards floor #{3}".format(column.elevatorList[x].ID,column.elevatorList[x].currentFloor, column.elevatorList[x].status, column.elevatorList[x].floorRequestList[0]))
+#     print()
+#     input("Press Enter to continue...")
+#     print()
+
+#     if userFloor == 1:
+#         userDirection = possibleDirections[0]
+#     elif userFloor == numberOfFloors:
+#         userDirection = possibleDirections[1]
+#     else:
+#         userDirection = possibleDirections[random.randrange(0,1)]
+
+#     if userDirection == possibleDirections[0] and userFloor == numberOfFloors - 1:
+#         userRequestedFloor = numberOfFloors
+#     elif userDirection == possibleDirections[1] and userFloor == 2:
+#         userRequestedFloor = 1
+#     elif userDirection == possibleDirections[0]:
+#         userRequestedFloor = random.randrange(userFloor + 1, numberOfFloors)
+#     else:
+#         userRequestedFloor = random.randrange(1, userFloor - 1)
             
+#     goodElevator = column.requestElevator(userFloor, userDirection)
+#     print()
+#     input("Press Enter to continue...")
+#     print()
+#     goodElevator.requestFloor(userRequestedFloor)
 
+# #Scenario picker
+# rightChoice = False
 
-userInputIsRight = False
+# print("Hello mister") 
 
-while userInputIsRight == False:
-    print("Hello mister") 
-    userNumberInput = input("Would you like a predefined scenario {1} or a customized scenario {2} ? : ")
-    if userNumberInput == '1':
-        rightChoice = False
-        while rightChoice == False:
-            userScenarioChoice = input("Would you like to try the scenario {1}, {2} or {3} ? : ")
-            if userScenarioChoice == '1' or userScenarioChoice == '2' or userScenarioChoice == '3':
-                inputInputsInColumn(10, 2, userScenarioChoice)
-                rightChoice = True
-            else:
-                os.system('cls')
-        userInputIsRight = True
-    elif userNumberInput == '2':                            ## IN PROGRESS ##
-        inputInputsInColumn(10, 2, '0')
-        userInputIsRight = True
-    else:
-        os.system('cls')
-        userInputIsRight = False
-    
-print("Thank you come again!")
+# while rightChoice == False:
+#     userScenarioChoice = input("Would you like to try the scenario {1}, {2}, {3} or {4} (#4 is customizable) ? : ")
+#     if userScenarioChoice == '1':
+#         inputInputsInColumn(10, 2, userScenarioChoice)
+#         rightChoice = True
+#     elif userScenarioChoice == '2':
+#         inputInputsInColumn(15, 5, userScenarioChoice)
+#         rightChoice = True
+#     elif userScenarioChoice == '3':
+#         inputInputsInColumn(30, 10, userScenarioChoice)
+#     elif userScenarioChoice == '4':
+#         userAmountOfFloors = int(input("How many floors do you want ? : "))
+#         userAmountOfElevators = int(input("How many elevators do you want ? : "))
+#         inputInputsInColumn(userAmountOfFloors, userAmountOfElevators, userScenarioChoice)
+#         rightChoice = True
+#     else:
+#         os.system('cls')
+
+# print("Thank you come again!")
